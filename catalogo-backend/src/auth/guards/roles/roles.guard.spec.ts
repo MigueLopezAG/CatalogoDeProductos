@@ -18,7 +18,6 @@ describe('RolesGuard', () => {
 
   describe('canActivate', () => {
     it('should return true if no roles are required', () => {
-      // Arrange
       const mockContext = {
         getHandler: jest.fn(),
         getClass: jest.fn(),
@@ -30,15 +29,13 @@ describe('RolesGuard', () => {
       };
       jest.spyOn(GqlExecutionContext, 'create').mockReturnValue(mockGqlContext as any);
 
-      // Act
       const result = guard.canActivate(mockContext as any);
 
-      // Assert
       expect(result).toBe(true);
     });
 
     it('should return true if user has required role', () => {
-      // Arrange
+
       const mockContext = {
         getHandler: jest.fn(),
         getClass: jest.fn(),
@@ -50,15 +47,13 @@ describe('RolesGuard', () => {
       };
       jest.spyOn(GqlExecutionContext, 'create').mockReturnValue(mockGqlContext as any);
 
-      // Act
       const result = guard.canActivate(mockContext as any);
 
-      // Assert
       expect(result).toBe(true);
     });
 
     it('should return false if user does not have required role', () => {
-      // Arrange
+
       const mockContext = {
         getHandler: jest.fn(),
         getClass: jest.fn(),
@@ -70,10 +65,8 @@ describe('RolesGuard', () => {
       };
       jest.spyOn(GqlExecutionContext, 'create').mockReturnValue(mockGqlContext as any);
 
-      // Act
       const result = guard.canActivate(mockContext as any);
 
-      // Assert
       expect(result).toBe(false);
     });
   });

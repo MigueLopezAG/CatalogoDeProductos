@@ -46,14 +46,14 @@ describe('AuthController', () => {
     };
 
     it('should register a new user', async () => {
-      // Arrange
+      
       const expectedResult = { token: 'jwt-token' };
       mockAuthService.register.mockResolvedValue(expectedResult);
 
-      // Act
+      
       const result = await authController.register(registerDto);
 
-      // Assert
+      
       expect(authService.register).toHaveBeenCalledWith(registerDto);
       expect(result).toEqual(expectedResult);
     });
@@ -66,14 +66,14 @@ describe('AuthController', () => {
     };
 
     it('should login user', async () => {
-      // Arrange
+      
       const expectedResult = { token: 'jwt-token' };
       mockAuthService.login.mockResolvedValue(expectedResult);
 
-      // Act
+      
       const result = await authController.login(loginDto);
 
-      // Assert
+      
       expect(authService.login).toHaveBeenCalledWith(loginDto);
       expect(result).toEqual(expectedResult);
     });

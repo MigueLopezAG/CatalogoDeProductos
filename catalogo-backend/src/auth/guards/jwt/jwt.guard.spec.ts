@@ -12,7 +12,7 @@ describe('JwtAuthGuard', () => {
 
   describe('getRequest', () => {
     it('should return request from GraphQL context', () => {
-      // Arrange
+      
       const mockRequest = { headers: {} };
       const mockContext = {
         getContext: jest.fn().mockReturnValue({ req: mockRequest }),
@@ -23,10 +23,10 @@ describe('JwtAuthGuard', () => {
 
       jest.spyOn(GqlExecutionContext, 'create').mockReturnValue(mockContext as any);
 
-      // Act
+      
       const result = guard.getRequest(mockExecutionContext);
 
-      // Assert
+      
       expect(GqlExecutionContext.create).toHaveBeenCalledWith(mockExecutionContext);
       expect(result).toBe(mockRequest);
     });

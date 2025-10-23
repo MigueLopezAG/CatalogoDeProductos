@@ -6,6 +6,12 @@ enum Role {
   ADMIN = 'admin',
 }
 
+/**We define the structure of the user params to create a schema on mongodb
+  @params email
+  @params password
+  @params role
+  @params createdAt
+*/
 @Schema()
 export class User extends Document {
   @Prop({ required: true, unique: true })
