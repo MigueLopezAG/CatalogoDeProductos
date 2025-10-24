@@ -47,6 +47,14 @@ export interface RegisterData {
   role: 'user' | 'admin';
 }
 
+export interface AuthContextType {
+  user: User | null;
+  login: (email: string, password: string) => void;
+  logout: () => void;
+  isLoading: boolean;
+}
+
+
 export interface AuthResponse {
   token: string;
 }

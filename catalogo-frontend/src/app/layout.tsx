@@ -1,19 +1,17 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-//import './globals.css';
-import { AuthProvider } from '@/context/AuthContext';
-import Providers from './providers';
-
+import type { Metadata } from 'next'
+import './globals.css'
+import { AuthProvider } from '@/context/AuthContext'
+import Providers from './providers'
 
 export const metadata: Metadata = {
   title: 'Catálogo de Productos',
   description: 'Sistema de gestión de catálogo de productos',
-};
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="es">
@@ -27,5 +25,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-  );
+  )
 }
