@@ -24,12 +24,6 @@ enum Role {
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
-  
-  //Expose the enpoint to get the categories of the products
-  @Get('categories')
-  async getCategories() {
-    return this.productsService.getCategories();
-  }
 
   //Expose the enpoint to load the Database with the DummyJson information
   @Post('sync')
@@ -53,7 +47,13 @@ export class ProductsController {
   async create(@Body() createProductDto: CreateProductDto) {
     return this.productsService.create(createProductDto);
   }
-
+  
+  /**Expose the enpoint to Get a product searched by @_id*/
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return this.productsService.findOne(id);
+  }
+  
   /**Expose the enpoint to Update a product searched by @_id*/
   @Put(':id')
   @UseGuards(JwtGuard, RolesGuard)

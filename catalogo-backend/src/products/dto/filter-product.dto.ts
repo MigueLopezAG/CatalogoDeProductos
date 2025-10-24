@@ -38,12 +38,14 @@ export class FilterProductDto {
 
   @Field(() => Int, { defaultValue: 1 })
   @IsOptional()
+  @Type(() => Number)
   @IsNumber()
   @Min(1)
   page?: number = 1;
 
   @Field(() => Int, { defaultValue: 10 })
   @IsOptional()
+  @Type(() => Number)
   @IsNumber()
   @Min(1)
   @Max(100)
