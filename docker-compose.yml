@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: catalog-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: prueba-catalogo-bd
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./backend/scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - catalog-network
+
+  backend:
+    build: 
+      context: ./catalogo-backend
+      dockerfile: Dockerfile
+    container_name: catalog-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: mongodb://localhost:27017/prueba-catalogo-bd
+      JWT_SECRET: your-super-secret-jwt-key-change-in-production
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongodb
+    networks:
+      - catalog-network
+    volumes:
+      - ./catalogo-backend/.env:/app/.env:ro
+
+  frontend:
+    build:
+      context: ./catalogo-frontend
+      dockerfile: Dockerfile
+    container_name: catalog-frontend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      NEST_PUBLIC_API_URL: http://localhost:3001
+    ports:
+      - "3001:3001"
+    depends_on:
+      - backend
+    networks:
+      - catalog-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  catalog-network:
+    driver: bridge
