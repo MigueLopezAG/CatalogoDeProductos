@@ -28,11 +28,11 @@ export class ProductsResolver {
     return result.products;
   }
 
-  @Query(() => [String])
-  async categories() {
-    return this.productsService.getCategories();
+  
+  @Query(() => Product, { name: 'product' })
+  async getProduct(@Args('id') id: string) {
+    return this.productsService.findOne(id);
   }
-
 
   @Mutation(() => Product)
   @UseGuards(JwtGuard, RolesGuard)

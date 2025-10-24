@@ -88,6 +88,15 @@ export class ProductsService {
     };
   }
   
+/**Function to find a product by ID */
+  async findOne(id: string): Promise<Product> {
+    const product = await this.productModel.findById(id);
+    if (!product) {
+      throw new NotFoundException('Product not found');
+    }
+    return product;
+  }
+
   /**Function to create a new product*/
   async create(createProductDto: CreateProductDto): Promise<Product> {
     const product = await this.productModel.create({
@@ -118,12 +127,6 @@ export class ProductsService {
       throw new NotFoundException('Product not found');
     }
     return product;
-  }
-
-  /**Function to get the categories of the products*/
-  async getCategories(): Promise<string[]> {
-    const categories = await this.productModel.distinct('category');
-    return categories;
   }
 
 }
